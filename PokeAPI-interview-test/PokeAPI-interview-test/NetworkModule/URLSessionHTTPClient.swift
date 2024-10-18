@@ -1,0 +1,38 @@
+//
+//  URLSessionHTTPClient.swift
+//  PokeAPI-interview-test
+//
+//  Created by Judy Tsai on 2024/10/18.
+//
+
+import Foundation
+
+class URLSessionHTTPClient: HTTPClient {
+    
+    let session: URLSession
+    
+    init(session: URLSession) {
+        self.session = session
+    }
+    
+    func request(with requestType: RequestType, completion: @escaping (Result<(Data, HTTPURLResponse), HTTPClientError>) -> ()) {
+        session.dataTask(with: requestType.urlRequest) { data, response, error in
+            if error != nil {
+                completion(.failure(.networkError))
+                return
+            }
+            
+            guard
+                let response = response as? HTTPURLResponse,
+                response.statusCode == 200,
+                let data
+            else {
+                completion(.failure(.cannotFindDataOrResponse))
+                return
+            }
+            
+            completion(.success((data, response)))
+            
+        }.resume()
+    }
+}
