@@ -18,6 +18,8 @@
 		18FECEDC2CC4F785008E68C6 /* PokemonRemoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FECEDB2CC4F785008E68C6 /* PokemonRemoteRepository.swift */; };
 		18FECEDE2CC5051C008E68C6 /* PokemonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FECEDD2CC5051C008E68C6 /* PokemonDTO.swift */; };
 		18FECEE02CC50582008E68C6 /* PokemonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FECEDF2CC50582008E68C6 /* PokemonRequest.swift */; };
+		18FECEE22CC50CE2008E68C6 /* PokemonUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FECEE12CC50CE2008E68C6 /* PokemonUseCase.swift */; };
+		18FECEE42CC50F55008E68C6 /* PokemonDomainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FECEE32CC50F55008E68C6 /* PokemonDomainModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		18FECEDB2CC4F785008E68C6 /* PokemonRemoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonRemoteRepository.swift; sourceTree = "<group>"; };
 		18FECEDD2CC5051C008E68C6 /* PokemonDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDTO.swift; sourceTree = "<group>"; };
 		18FECEDF2CC50582008E68C6 /* PokemonRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonRequest.swift; sourceTree = "<group>"; };
+		18FECEE12CC50CE2008E68C6 /* PokemonUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonUseCase.swift; sourceTree = "<group>"; };
+		18FECEE32CC50F55008E68C6 /* PokemonDomainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDomainModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,8 @@
 			children = (
 				18B604812CC28D39004653BA /* PokeAPI_interview_testApp.swift */,
 				18B604832CC28D39004653BA /* ContentView.swift */,
+				18FECEE12CC50CE2008E68C6 /* PokemonUseCase.swift */,
+				18FECEE32CC50F55008E68C6 /* PokemonDomainModel.swift */,
 				18FECEDB2CC4F785008E68C6 /* PokemonRemoteRepository.swift */,
 				18FECEDF2CC50582008E68C6 /* PokemonRequest.swift */,
 				18FECEDD2CC5051C008E68C6 /* PokemonDTO.swift */,
@@ -227,6 +233,8 @@
 				18FECEE02CC50582008E68C6 /* PokemonRequest.swift in Sources */,
 				18B604942CC2924B004653BA /* URLSessionHTTPClient.swift in Sources */,
 				18B604822CC28D39004653BA /* PokeAPI_interview_testApp.swift in Sources */,
+				18FECEE22CC50CE2008E68C6 /* PokemonUseCase.swift in Sources */,
+				18FECEE42CC50F55008E68C6 /* PokemonDomainModel.swift in Sources */,
 				18B604902CC28E10004653BA /* HTTPClient.swift in Sources */,
 				18B604922CC29164004653BA /* RequestType.swift in Sources */,
 				18FECEDC2CC4F785008E68C6 /* PokemonRemoteRepository.swift in Sources */,
