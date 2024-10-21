@@ -29,6 +29,14 @@
 		18FECEFA2CC62296008E68C6 /* TypeBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FECEF92CC62296008E68C6 /* TypeBadge.swift */; };
 		18FECEFD2CC622E6008E68C6 /* PokemonInfoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FECEFC2CC622E5008E68C6 /* PokemonInfoCard.swift */; };
 		18FECEFF2CC62340008E68C6 /* PokemonTypeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FECEFE2CC62340008E68C6 /* PokemonTypeCard.swift */; };
+		18FECF012CC62402008E68C6 /* Font+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FECF002CC62402008E68C6 /* Font+extension.swift */; };
+		18FECF192CC629BC008E68C6 /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18FECF122CC629BB008E68C6 /* Manrope-Regular.ttf */; };
+		18FECF1A2CC629BC008E68C6 /* Manrope-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18FECF132CC629BB008E68C6 /* Manrope-ExtraBold.ttf */; };
+		18FECF1B2CC629BC008E68C6 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18FECF142CC629BB008E68C6 /* Manrope-Bold.ttf */; };
+		18FECF1C2CC629BC008E68C6 /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18FECF152CC629BB008E68C6 /* Manrope-SemiBold.ttf */; };
+		18FECF1D2CC629BC008E68C6 /* Manrope-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18FECF162CC629BC008E68C6 /* Manrope-ExtraLight.ttf */; };
+		18FECF1E2CC629BC008E68C6 /* Manrope-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18FECF172CC629BC008E68C6 /* Manrope-Medium.ttf */; };
+		18FECF1F2CC629BC008E68C6 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18FECF182CC629BC008E68C6 /* Manrope-Light.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +74,15 @@
 		18FECEF92CC62296008E68C6 /* TypeBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeBadge.swift; sourceTree = "<group>"; };
 		18FECEFC2CC622E5008E68C6 /* PokemonInfoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoCard.swift; sourceTree = "<group>"; };
 		18FECEFE2CC62340008E68C6 /* PokemonTypeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTypeCard.swift; sourceTree = "<group>"; };
+		18FECF002CC62402008E68C6 /* Font+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+extension.swift"; sourceTree = "<group>"; };
+		18FECF0A2CC6249C008E68C6 /* PokeAPI-interview-test-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "PokeAPI-interview-test-Tests-Info.plist"; sourceTree = SOURCE_ROOT; };
+		18FECF122CC629BB008E68C6 /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
+		18FECF132CC629BB008E68C6 /* Manrope-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraBold.ttf"; sourceTree = "<group>"; };
+		18FECF142CC629BB008E68C6 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
+		18FECF152CC629BB008E68C6 /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
+		18FECF162CC629BC008E68C6 /* Manrope-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraLight.ttf"; sourceTree = "<group>"; };
+		18FECF172CC629BC008E68C6 /* Manrope-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Medium.ttf"; sourceTree = "<group>"; };
+		18FECF182CC629BC008E68C6 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +131,7 @@
 				18FECEEB2CC6024A008E68C6 /* Repository */,
 				18FECEED2CC60391008E68C6 /* Service */,
 				18B604852CC28D3E004653BA /* Assets.xcassets */,
+				18FECF092CC6245A008E68C6 /* Font */,
 				18B604872CC28D3E004653BA /* Preview Content */,
 			);
 			path = "PokeAPI-interview-test";
@@ -140,6 +158,7 @@
 		18B6049B2CC292E3004653BA /* PokeAPI-interview-test_Tests */ = {
 			isa = PBXGroup;
 			children = (
+				18FECF0A2CC6249C008E68C6 /* PokeAPI-interview-test-Tests-Info.plist */,
 				18B6049C2CC292E3004653BA /* HTTPClientEndToEndTests.swift */,
 			);
 			path = "PokeAPI-interview-test_Tests";
@@ -206,6 +225,7 @@
 				18FECEFE2CC62340008E68C6 /* PokemonTypeCard.swift */,
 				18FECEF62CC62242008E68C6 /* ViewModifier */,
 				18FECEFB2CC622B0008E68C6 /* Component */,
+				18FECF202CC62A7E008E68C6 /* Extension */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -226,6 +246,28 @@
 				18FECEF92CC62296008E68C6 /* TypeBadge.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		18FECF092CC6245A008E68C6 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				18FECF142CC629BB008E68C6 /* Manrope-Bold.ttf */,
+				18FECF132CC629BB008E68C6 /* Manrope-ExtraBold.ttf */,
+				18FECF162CC629BC008E68C6 /* Manrope-ExtraLight.ttf */,
+				18FECF182CC629BC008E68C6 /* Manrope-Light.ttf */,
+				18FECF172CC629BC008E68C6 /* Manrope-Medium.ttf */,
+				18FECF122CC629BB008E68C6 /* Manrope-Regular.ttf */,
+				18FECF152CC629BB008E68C6 /* Manrope-SemiBold.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		18FECF202CC62A7E008E68C6 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				18FECF002CC62402008E68C6 /* Font+extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,7 +352,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				18B604892CC28D3E004653BA /* Preview Assets.xcassets in Resources */,
+				18FECF1B2CC629BC008E68C6 /* Manrope-Bold.ttf in Resources */,
+				18FECF1A2CC629BC008E68C6 /* Manrope-ExtraBold.ttf in Resources */,
 				18B604862CC28D3E004653BA /* Assets.xcassets in Resources */,
+				18FECF1C2CC629BC008E68C6 /* Manrope-SemiBold.ttf in Resources */,
+				18FECF1D2CC629BC008E68C6 /* Manrope-ExtraLight.ttf in Resources */,
+				18FECF1E2CC629BC008E68C6 /* Manrope-Medium.ttf in Resources */,
+				18FECF1F2CC629BC008E68C6 /* Manrope-Light.ttf in Resources */,
+				18FECF192CC629BC008E68C6 /* Manrope-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +391,7 @@
 				18FECEF52CC62225008E68C6 /* CardBackground.swift in Sources */,
 				18FECEFD2CC622E6008E68C6 /* PokemonInfoCard.swift in Sources */,
 				18FECEE62CC51D60008E68C6 /* PokemonViewModel.swift in Sources */,
+				18FECF012CC62402008E68C6 /* Font+extension.swift in Sources */,
 				18B604922CC29164004653BA /* RequestType.swift in Sources */,
 				18FECEF82CC62268008E68C6 /* InfoRow.swift in Sources */,
 				18FECEDC2CC4F785008E68C6 /* PokemonRemoteRepository.swift in Sources */,
@@ -554,6 +604,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 65QQ97XV3Q;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PokeAPI-interview-test-Tests-Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.judytsai.PokeAPI-interview-test-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -572,6 +623,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 65QQ97XV3Q;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PokeAPI-interview-test-Tests-Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.judytsai.PokeAPI-interview-test-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

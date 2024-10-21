@@ -13,6 +13,7 @@ struct InfoRow: View {
     
     var body: some View {
         Text("\(label): \(value)")
+            .font(.manropeBody)
     }
 }
 

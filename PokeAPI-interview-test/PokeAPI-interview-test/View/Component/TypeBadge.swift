@@ -12,6 +12,7 @@ struct TypeBadge: View {
     
     var body: some View {
         Text(text)
+            .font(.manropeBody)
             .frame(width: 153, height: 26)
             .background(Color.pokemonLightGray)
             .clipShape(Capsule(style: .continuous))

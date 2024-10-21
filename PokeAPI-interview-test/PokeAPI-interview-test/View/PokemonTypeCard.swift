@@ -13,6 +13,7 @@ struct PokemonTypeCard: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("type")
+                .font(.manropeBody)
             TypeBadge(text: type)
             Spacer()
         }
