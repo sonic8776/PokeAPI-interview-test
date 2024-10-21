@@ -16,6 +16,7 @@ enum PokemonRemoteRepositoryError: Error {
 
 protocol PokemonRemoteRepositoryProtocol {
     func requestPokemon(withName name: String) -> AnyPublisher<PokemonDTO, PokemonRemoteRepositoryError>
+    func downloadImage(fromURL url: URL) -> AnyPublisher<Data, PokemonRemoteRepositoryError>
 }
 
 final class PokemonRemoteRepository: PokemonRemoteRepositoryProtocol {
@@ -27,9 +28,9 @@ final class PokemonRemoteRepository: PokemonRemoteRepositoryProtocol {
     }
     
     func requestPokemon(withName name: String) -> AnyPublisher<PokemonDTO, PokemonRemoteRepositoryError> {
-        let requestType = PokemonRequest(name: name.lowercased())
+        let pokemonRequest = PokemonRequest(name: name.lowercased())
         
-        return client.request(with: requestType)
+        return client.request(with: pokemonRequest)
             .map { data, _ in data }
             .decode(type: PokemonDTO.self, decoder: JSONDecoder())
             .mapError { error -> PokemonRemoteRepositoryError in
@@ -49,6 +50,25 @@ final class PokemonRemoteRepository: PokemonRemoteRepositoryProtocol {
                     }
                 default:
                     return .networkError
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func downloadImage(fromURL url: URL) -> AnyPublisher<Data, PokemonRemoteRepositoryError> {
+        let imageDownloadRequest = DownloadImageRequest(imageURL: url)
+        return client.request(with: imageDownloadRequest)
+            .map { data, _ in data }
+            .mapError { error -> PokemonRemoteRepositoryError in
+                print("Error: \(error)")
+                
+                switch error {
+                case .networkError:
+                    return .networkError
+                case .cannotFindDataOrResponse:
+                    return .failedToParseData
+                case .invalidStatusCode(let code):
+                    return .invalidStatusCode(code)
                 }
             }
             .eraseToAnyPublisher()

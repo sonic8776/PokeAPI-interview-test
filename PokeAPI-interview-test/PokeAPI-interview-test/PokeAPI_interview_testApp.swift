@@ -11,7 +11,7 @@ import SwiftUI
 struct PokeAPI_interview_testApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PokemonView()
         }
     }
 }

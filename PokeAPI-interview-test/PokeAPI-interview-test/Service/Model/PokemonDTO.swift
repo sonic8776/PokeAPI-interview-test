@@ -45,21 +45,3 @@ struct PokemonDTO: Codable {
         }
     }
 }
-
-// MARK: - DTO to Domain Mapping
-
-extension PokemonDTO {
-    func toDomain() -> PokemonDomainModel? {
-        guard let primaryType = types.first?.type.name,
-              let imageURL = URL(string: sprites.other.home.frontDefault) else {
-            return nil
-        }
-        
-        return PokemonDomainModel(id: id,
-                                  name: name.capitalized,
-                                  height: height,
-                                  weight: weight,
-                                  type: primaryType,
-                                  imageURL: imageURL)
-    }
-}

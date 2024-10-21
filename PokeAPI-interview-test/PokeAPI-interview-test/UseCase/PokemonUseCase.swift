@@ -27,6 +27,7 @@ enum PokemonUseCaseError: LocalizedError {
 
 protocol PokemonUseCaseProtocol {
     func getPokemon(withName name: String) -> AnyPublisher<PokemonDomainModel, PokemonUseCaseError>
+    func getImage(fromURL url: URL) -> AnyPublisher<Data, PokemonUseCaseError>
 }
 
 final class PokemonUseCase: PokemonUseCaseProtocol {
@@ -46,8 +47,8 @@ final class PokemonUseCase: PokemonUseCaseProtocol {
         
         return repository.requestPokemon(withName: name)
             .mapError({ PokemonUseCaseError.repositoryError($0) })
-            .compactMap { dto -> PokemonDomainModel? in
-                dto.toDomain()
+            .map { dto -> PokemonDomainModel in
+                return PokemonDomainModel(fromDTO: dto)
             }
             .tryMap { domain -> PokemonDomainModel in
                 // Additional business validation if needed
@@ -62,6 +63,12 @@ final class PokemonUseCase: PokemonUseCaseProtocol {
                 }
                 return .invalidPokemonData
             }
+            .eraseToAnyPublisher()
+    }
+    
+    func getImage(fromURL url: URL) -> AnyPublisher<Data, PokemonUseCaseError> {
+        return repository.downloadImage(fromURL: url)
+            .mapError { PokemonUseCaseError.repositoryError($0) }
             .eraseToAnyPublisher()
     }
 }
