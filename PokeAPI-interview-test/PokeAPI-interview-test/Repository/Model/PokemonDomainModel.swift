@@ -41,7 +41,7 @@ struct PokemonDomainModel {
     
     /// "6.0kg"
     var kgWeight: String {
-        formatToDecimalPlace(value: Double(weight) / Double(10)) + " kg"
+        formatToDecimalPlace(value: Double(weight) / Double(10)) + "kg"
     }
 }
 
