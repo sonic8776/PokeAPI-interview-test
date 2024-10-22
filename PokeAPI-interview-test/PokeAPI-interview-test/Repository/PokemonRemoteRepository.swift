@@ -30,27 +30,9 @@ final class PokemonRemoteRepository: PokemonRemoteRepositoryProtocol {
     func requestPokemon(withName name: String) -> AnyPublisher<PokemonDTO, PokemonRemoteRepositoryError> {
         let pokemonRequest = PokemonRequest(name: name.lowercased())
         
-        return client.request(with: pokemonRequest)
-            .map { data, _ in data }
-            .decode(type: PokemonDTO.self, decoder: JSONDecoder())
-            .mapError { error -> PokemonRemoteRepositoryError in
-                print("Error: \(error)")
-                
-                switch error {
-                case is DecodingError:
-                    return .failedToParseData
-                case let httpError as HTTPClientError:
-                    switch httpError {
-                    case .networkError:
-                        return .networkError
-                    case .cannotFindDataOrResponse:
-                        return .failedToParseData
-                    case .invalidStatusCode(let code):
-                        return .invalidStatusCode(code)
-                    }
-                default:
-                    return .networkError
-                }
+        return client.requestJSON(with: pokemonRequest, type: PokemonDTO.self)
+            .mapError { [weak self] error -> PokemonRemoteRepositoryError in
+                self?.handleError(error) ?? .networkError
             }
             .eraseToAnyPublisher()
     }
@@ -59,18 +41,36 @@ final class PokemonRemoteRepository: PokemonRemoteRepositoryProtocol {
         let imageDownloadRequest = DownloadImageRequest(imageURL: url)
         return client.request(with: imageDownloadRequest)
             .map { data, _ in data }
-            .mapError { error -> PokemonRemoteRepositoryError in
-                print("Error: \(error)")
-                
-                switch error {
-                case .networkError:
-                    return .networkError
-                case .cannotFindDataOrResponse:
-                    return .failedToParseData
-                case .invalidStatusCode(let code):
-                    return .invalidStatusCode(code)
-                }
+            .mapError { [weak self] error -> PokemonRemoteRepositoryError in
+                self?.handleError(error) ?? .networkError
             }
             .eraseToAnyPublisher()
+    }
+}
+
+// MARK: - Helper methods
+
+private extension PokemonRemoteRepository {
+    func handleError(_ error: Error) -> PokemonRemoteRepositoryError {
+        print("Error: \(error)")
+        switch error {
+        case is DecodingError:
+            return .failedToParseData
+        case let httpError as HTTPClientError:
+            return mapHTTPError(httpError)
+        default:
+            return .networkError
+        }
+    }
+    
+    func mapHTTPError(_ error: HTTPClientError) -> PokemonRemoteRepositoryError {
+        switch error {
+        case .networkError:
+            return .networkError
+        case .cannotFindDataOrResponse:
+            return .failedToParseData
+        case .invalidStatusCode(let code):
+            return .invalidStatusCode(code)
+        }
     }
 }

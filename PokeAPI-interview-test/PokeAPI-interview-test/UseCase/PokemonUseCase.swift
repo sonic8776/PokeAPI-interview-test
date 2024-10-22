@@ -10,15 +10,12 @@ import Combine
 
 enum PokemonUseCaseError: LocalizedError {
     case repositoryError(PokemonRemoteRepositoryError)
-    case invalidPokemonData
     case emptyName
     
     var errorDescription: String? {
         switch self {
         case .repositoryError(let error):
             return "Repository error: \(error)"
-        case .invalidPokemonData:
-            return "Invalid pokemon data received"
         case .emptyName:
             return "Pokemon name cannot be empty"
         }
@@ -49,19 +46,6 @@ final class PokemonUseCase: PokemonUseCaseProtocol {
             .mapError({ PokemonUseCaseError.repositoryError($0) })
             .map { dto -> PokemonDomainModel in
                 return PokemonDomainModel(fromDTO: dto)
-            }
-            .tryMap { domain -> PokemonDomainModel in
-                // Additional business validation if needed
-                guard domain.id > 0 else {
-                    throw PokemonUseCaseError.invalidPokemonData
-                }
-                return domain
-            }
-            .mapError { error -> PokemonUseCaseError in
-                if let useCaseError = error as? PokemonUseCaseError {
-                    return useCaseError
-                }
-                return .invalidPokemonData
             }
             .eraseToAnyPublisher()
     }

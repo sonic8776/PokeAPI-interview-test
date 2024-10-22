@@ -10,7 +10,8 @@ import Combine
 
 final class URLSessionHTTPClient: HTTPClient {
     
-    let session: URLSession
+    private let session: URLSession
+    private let acceptableStatusCodes = 200...299
     
     init(session: URLSession) {
         self.session = session
@@ -19,21 +20,21 @@ final class URLSessionHTTPClient: HTTPClient {
     // Using Combine
     func request(with requestType: RequestType) -> AnyPublisher<(Data, HTTPURLResponse), HTTPClientError> {
         return session.dataTaskPublisher(for: requestType.urlRequest)
-            .mapError { _ in HTTPClientError.networkError }
-            .flatMap { (data, response) -> AnyPublisher<(Data, HTTPURLResponse), HTTPClientError> in
-                guard let response = response as? HTTPURLResponse else {
-                    return Fail(error: HTTPClientError.cannotFindDataOrResponse)
-                        .eraseToAnyPublisher()
+            .tryMap { [weak self] (data, response) -> (Data, HTTPURLResponse) in
+                guard let self = self else { throw HTTPClientError.networkError }
+                
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    throw HTTPClientError.cannotFindDataOrResponse
                 }
                 
-                guard response.statusCode == 200 else {
-                    return Fail(error: HTTPClientError.invalidStatusCode(response.statusCode))
-                        .eraseToAnyPublisher()
+                guard self.acceptableStatusCodes.contains(httpResponse.statusCode) else {
+                    throw HTTPClientError.invalidStatusCode(httpResponse.statusCode)
                 }
                 
-                return Just((data, response))
-                    .setFailureType(to: HTTPClientError.self)
-                    .eraseToAnyPublisher()
+                return (data, httpResponse)
+            }
+            .mapError { error -> HTTPClientError in
+                return HTTPClientError.networkError
             }
             .eraseToAnyPublisher()
     }
@@ -48,7 +49,7 @@ final class URLSessionHTTPClient: HTTPClient {
             
             guard
                 let response = response as? HTTPURLResponse,
-                response.statusCode == 200,
+                self.acceptableStatusCodes.contains(response.statusCode),
                 let data
             else {
                 completion(.failure(.cannotFindDataOrResponse))
