@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PokemonImageView: View {
-    let imageState: PokemonViewModel.ImageState
+    let imageState: ImageState
     
     var body: some View {
         Group {

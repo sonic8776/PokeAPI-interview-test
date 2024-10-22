@@ -29,7 +29,6 @@ final class PokemonRemoteRepository: PokemonRemoteRepositoryProtocol {
     
     func requestPokemon(withName name: String) -> AnyPublisher<PokemonDTO, PokemonRemoteRepositoryError> {
         let pokemonRequest = PokemonRequest(name: name.lowercased())
-        
         return client.requestJSON(with: pokemonRequest, type: PokemonDTO.self)
             .mapError { [weak self] error -> PokemonRemoteRepositoryError in
                 self?.handleError(error) ?? .networkError
