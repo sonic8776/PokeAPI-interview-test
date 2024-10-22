@@ -6,10 +6,83 @@
 //
 
 import XCTest
+import Combine
 @testable import PokeAPI_interview_test
 
 final class HTTPClientEndToEndTests: XCTestCase {
-
+    
+    var cancellables: Set<AnyCancellable> = []
+    
+    override func tearDown() {
+        super.tearDown()
+        cancellables.removeAll()
+    }
+    
+    func test_request_combine_onSuccessfulRequestCase() {
+        let sut = makeSUT()
+        let requestTypeSpy = RequestTypeSpy(pokemonName: "pikachu")
+        let expectation = XCTestExpectation(description: "Wait for completion...")
+        
+        sut.request(with: requestTypeSpy)
+            .sink(
+                receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        XCTFail("The API should be successful! Error: \(error)")
+                        expectation.fulfill()
+                    }
+                },
+                receiveValue: { (data, _) in
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data)
+                        if let jsonDict = json as? [String: Any] {
+                            let elementCount = jsonDict.keys.count
+                            print("ElementCount = \(elementCount)")
+                            XCTAssertEqual(elementCount, 20)
+                            expectation.fulfill()
+                        } else {
+                            XCTFail("Should successfully parse json to dictionary")
+                            expectation.fulfill()
+                        }
+                    } catch {
+                        XCTFail("The data should be parsed to Json! Error: \(error)")
+                        expectation.fulfill()
+                    }
+                }
+            )
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 30)
+    }
+    
+    func test_request_combine_onInvalidPathCase() {
+        let sut = makeSUT()
+        let requestTypeSpy = RequestTypeSpy(pokemonName: "non-existent-pokemon123456")
+        let expectation = XCTestExpectation(description: "Wait for completion...")
+        
+        sut.request(with: requestTypeSpy)
+            .sink(
+                receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        XCTFail("The request should fail with invalid path")
+                        expectation.fulfill()
+                    case .failure(let error):
+                        XCTAssertNotNil(error)
+                        expectation.fulfill()
+                    }
+                },
+                receiveValue: { _ in
+                    XCTFail("Should not receive any value")
+                }
+            )
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 30)
+    }
+    
     func test_request_onSuccessfulRequestCase() {
         let sut = makeSUT()
         let requestTypeSpy = RequestTypeSpy(pokemonName: "pikachu")
@@ -64,6 +137,8 @@ final class HTTPClientEndToEndTests: XCTestCase {
         wait(for: [expectation], timeout: 30)
     }
 }
+
+// MARK: - Helper methods
 
 private extension HTTPClientEndToEndTests {
     
